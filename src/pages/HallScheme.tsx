@@ -1,7 +1,8 @@
+import React from 'react';
 import { BookingData, Seat } from "@/helpers/helpers";
 import { Legend } from "./Legend";
 
-interface HallSchemeProps {
+export interface HallSchemeProps {
   bookingData: BookingData;
   selectedDate: string;
   selectedTime: string;

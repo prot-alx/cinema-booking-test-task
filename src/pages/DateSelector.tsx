@@ -1,4 +1,6 @@
-interface DateSelectorProps {
+import React from 'react';
+
+export interface DateSelectorProps {
   dates: string[];
   selectedDate: string;
   onDateSelect: (date: string) => void;

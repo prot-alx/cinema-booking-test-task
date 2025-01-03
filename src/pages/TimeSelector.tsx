@@ -1,4 +1,6 @@
-interface TimeSelectorProps {
+import React from 'react';
+
+export interface TimeSelectorProps {
   sessions: string[];
   selectedTime: string;
   selectedDate: string;
