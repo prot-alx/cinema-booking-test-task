@@ -19,9 +19,14 @@ export default function BookingPage() {
   const dates = generateDateRange();
 
   useEffect(() => {
-    const data = initializeBookingData();
-    setBookingData(data);
-    setSelectedDate(dates[7]);
+    try {
+      const data = initializeBookingData();
+      setBookingData(data);
+      setSelectedDate(dates[7]);
+    } catch (e) {
+      const error = e instanceof Error ? e : new Error("Unknown error");
+      throw new Error("error", { cause: error });
+    }
   }, []);
 
   const isBookingAvailable = (date: string, time: string): boolean => {
@@ -44,10 +49,10 @@ export default function BookingPage() {
     }
 
     if (seat.status === "free" && bookingData) {
-      const newData = structuredClone(bookingData);
+      const newData = JSON.parse(JSON.stringify(bookingData));
       const seatToUpdate = newData[selectedDate].sessions[selectedTime].seats[
         rowId
-      ].find((s) => s.id === seat.id);
+      ].find((s: Seat) => s.id === seat.id);
       if (seatToUpdate) {
         seatToUpdate.status = "booked";
         setBookingData(newData);

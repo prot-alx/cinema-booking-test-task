@@ -119,7 +119,7 @@ export function initializeBookingData(): BookingData {
         sessions: SESSIONS.reduce(
           (acc, time) => ({
             ...acc,
-            [time]: { seats: structuredClone(HALL_TEMPLATE) },
+            [time]: { seats: JSON.parse(JSON.stringify(HALL_TEMPLATE)) },
           }),
           {} as Record<string, Session>
         ),
